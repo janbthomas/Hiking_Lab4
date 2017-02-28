@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGj-T9-WgI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add View Controller-->
+        <scene sceneID="6wm-Xc-UUy">
+            <objects>
+                <viewController id="rrf-Eu-nt8" customClass="AddViewController" customModule="CIS55Lab2_JanThomas_NodiaMamatova" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xbe-UV-TT7"/>
+                        <viewControllerLayoutGuide type="bottom" id="5zC-ix-svf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dUA-Fp-yuH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a new hiking location" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K4x-eA-fK3">
+                                <rect key="frame" x="49" y="120" width="293" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Hiking description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-w2-xJq">
+                                <rect key="frame" x="49" y="179" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFO-sa-Zcc">
+                                <rect key="frame" x="55" y="426" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="clickSave:" destination="rrf-Eu-nt8" eventType="touchUpInside" id="bPV-TD-FwD"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Image File Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xn7-jI-hzr">
+                                <rect key="frame" x="49" y="364" width="222" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="As8-Oz-KoW">
+                                <rect key="frame" x="223" y="426" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="clickCancel:" destination="rrf-Eu-nt8" eventType="touchUpInside" id="bWq-2t-Lsl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="AddHikingDescription" destination="LfQ-w2-xJq" id="h4a-gC-QSF"/>
+                        <outlet property="AddHikingLocation" destination="K4x-eA-fK3" id="W8A-h3-QAG"/>
+                        <outlet property="AddImageName" destination="xn7-jI-hzr" id="njY-Ba-cTc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vPD-WM-1iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2686" y="-718"/>
+        </scene>
+        <!--Bay Area Hiking-->
+        <scene sceneID="83S-32-YuS">
+            <objects>
+                <tableViewController title="Bay Area Hiking" id="iLU-sm-nT6" customClass="MyTableViewController" customModule="CIS55Lab2_JanThomas_NodiaMamatova" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" id="SGi-nO-slR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HikingCell" rowHeight="72" id="JtX-zQ-BMh" customClass="MyTableViewCell" customModule="CIS55Lab2_JanThomas_NodiaMamatova" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JtX-zQ-BMh" id="QcW-jL-JrR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hiking Location" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lay-Sg-BpM">
+                                            <rect key="frame" x="15" y="11" width="176" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Oy-Hl-6d0">
+                                            <rect key="frame" x="190" y="4" width="185" height="65"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="9Oy-Hl-6d0" id="mhg-cE-fBP"/>
+                                    <outlet property="cellItemName" destination="Lay-Sg-BpM" id="Umj-fs-lqg"/>
+                                    <segue destination="vW2-Y4-ZKo" kind="show" identifier="ShowItemDetail" id="BBf-wa-Bkc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iLU-sm-nT6" id="O06-mI-ue4"/>
+                            <outlet property="delegate" destination="iLU-sm-nT6" id="Dqo-fw-Tvv"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Bay Area Hiking" id="OuR-O4-YVV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="thy-ss-bzW">
+                            <connections>
+                                <segue destination="rrf-Eu-nt8" kind="presentation" identifier="AddNewItem" id="iGo-dc-fj8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgm-om-Z09" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1908" y="73.313343328335833"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="td2-QF-mRy">
+            <objects>
+                <navigationController id="VFb-Ei-9VH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" id="a9s-gY-QUS"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KoM-Tq-7fB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HG6-e0-8xT" kind="relationship" relationship="rootViewController" id="1Cg-rz-xdD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUu-JD-Ygm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="969" y="814"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="c16-Md-Edm">
+            <objects>
+                <viewController title="About" id="HG6-e0-8xT" customClass="AboutViewController" customModule="CIS55Lab2_JanThomas_NodiaMamatova" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ov9-Tq-8BQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="JOD-ix-ike"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oLk-JK-GVh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="enN-GS-srf">
+                                <rect key="frame" x="13" y="77" width="142" height="142"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jan Thomas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rw-df-cf6">
+                                <rect key="frame" x="13" y="245" width="155" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mzK-gW-B2N">
+                                <rect key="frame" x="198" y="77" width="142" height="142"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nodira Mamatova" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igg-g4-DtU">
+                                <rect key="frame" x="198" y="245" width="135" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nodira has been a QA engineer for 9 years.  Nodira's hobbies are hiking and reading." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="off-sk-7c5">
+                                <rect key="frame" x="198" y="274" width="172" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jan has been a web developer for 7 years.     Jan's hobbies are hiking and painting." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHD-8O-bg8">
+                                <rect key="frame" x="13" y="281" width="172" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="erS-uf-ava"/>
+                    <connections>
+                        <outlet property="JansPhoto" destination="enN-GS-srf" id="RVg-dS-KOM"/>
+                        <outlet property="Nodira" destination="mzK-gW-B2N" id="5w6-GO-rAm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LdL-Qv-g3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1893.5999999999999" y="812.74362818590714"/>
+        </scene>
+        <!--My Detail View Controller-->
+        <scene sceneID="GIL-1j-k7L">
+            <objects>
+                <viewController id="vW2-Y4-ZKo" customClass="MyDetailViewController" customModule="CIS55Lab2_JanThomas_NodiaMamatova" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gjH-kM-9c1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Smu-nD-h5u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lCP-Kj-edB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ivv-vR-T2t">
+                                <rect key="frame" x="0.0" y="66" width="375" height="251"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hiking Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRF-w9-Hx4">
+                                <rect key="frame" x="16" y="350" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Location Details" translatesAutoresizingMaskIntoConstraints="NO" id="B03-Ov-G4u">
+                                <rect key="frame" x="16" y="376" width="343" height="162"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImageItem" destination="ivv-vR-T2t" id="Ug6-St-dXB"/>
+                        <outlet property="LabelDetail" destination="B03-Ov-G4u" id="0Th-lv-emk"/>
+                        <outlet property="LabelItem" destination="rRF-w9-Hx4" id="nd6-tV-Nkg"/>
+                        <outlet property="imageItem" destination="ivv-vR-T2t" id="A2H-Bo-8Kf"/>
+                        <outlet property="labelDetail" destination="B03-Ov-G4u" id="93x-Fw-M8i"/>
+                        <outlet property="labelItem" destination="rRF-w9-Hx4" id="08R-bS-lM1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qix-7U-gzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2660" y="75.112443778110944"/>
+        </scene>
+        <!--Bay Area Hiking-->
+        <scene sceneID="hzn-1b-TaN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yhC-Mi-9rW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bay Area Hiking" id="BH9-A6-pkz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6uY-3x-o39">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iLU-sm-nT6" kind="relationship" relationship="rootViewController" id="YLJ-NW-JlX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEr-ch-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="968.79999999999995" y="73.313343328335833"/>
+        </scene>
+        <!--Bay Area Hiking-->
+        <scene sceneID="2A6-UY-0eC">
+            <objects>
+                <tabBarController title="Bay Area Hiking" automaticallyAdjustsScrollViewInsets="NO" id="hGj-T9-WgI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Zaj-C6-m1e">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yhC-Mi-9rW" kind="relationship" relationship="viewControllers" id="hub-DZ-Erb"/>
+                        <segue destination="VFb-Ei-9VH" kind="relationship" relationship="viewControllers" id="qaZ-oZ-9Js"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PUq-PK-jZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-474" y="417"/>
+        </scene>
+    </scenes>
+</document>
