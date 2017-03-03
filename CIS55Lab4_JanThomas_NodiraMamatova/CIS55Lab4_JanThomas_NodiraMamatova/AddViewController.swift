@@ -11,6 +11,8 @@ import CoreData
 
 class AddViewController: UIViewController {
 
+    @IBOutlet weak var AddHikingSeason: UITextField!
+    @IBOutlet weak var AddHikingDifficulty: UITextField!
     @IBOutlet weak var AddImageName: UITextField!
     @IBOutlet weak var AddHikingDescription: UITextView!
     @IBOutlet weak var AddHikingLocation: UITextField!
@@ -36,7 +38,17 @@ class AddViewController: UIViewController {
             
             newHikingItem.hikingLocations = self.AddHikingLocation.text!
             newHikingItem.hikingDetail = self.AddHikingDescription.text!
-            newHikingItem.hikingImages = NSData(data: UIImagePNGRepresentation(UIImage(named: self.AddImageName.text!)!)!)
+            newHikingItem.hikingSeason = self.AddHikingSeason.text!
+            newHikingItem.hikingDifficulty = self.AddHikingDifficulty.text!
+            
+            let thisImage = UIImage(named: self.AddImageName.text!)
+            
+            if thisImage != nil {
+                newHikingItem.hikingImages = NSData(data: UIImagePNGRepresentation(UIImage(named: self.AddImageName.text!)!)!)
+            }
+            else {
+                newHikingItem.hikingImages = NSData(data: UIImagePNGRepresentation(UIImage(named: String("trail")!)!)!)
+            }
             
             appDelegate.saveContext()
             print("Save Button Clicked")

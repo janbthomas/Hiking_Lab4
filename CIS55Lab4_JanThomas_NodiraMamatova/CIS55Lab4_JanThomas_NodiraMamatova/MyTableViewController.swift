@@ -1,6 +1,6 @@
 //
 //  MyTableViewController.swift
-//  CIS55Lab2_JanThomas
+//  CIS55Lab4_JanThomas_NodiraMamatova
 //
 //  Created by Jan on 2/3/17.
 //  Copyright © 2017 DeAnza. All rights reserved.
@@ -80,17 +80,20 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        // Where changes are made, after the core data is saved, reset the loaded list and refresh
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
         case .delete:
-            if let indexPath = newIndexPath {
+            if let indexPath = indexPath {
+                print("delete \(indexPath)\n")
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         case .update:
-            if let indexPath = newIndexPath {
+            if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .fade)
             }
         default:
@@ -141,13 +144,17 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         // Configure the cell...
 
         cell.cellItemName?.text = cellItem.hikingLocations
-        cell.cellImage?.image = UIImage(data: cellItem.hikingImages as! Data)
+        
+        if cellItem.hikingImages != nil {
+            cell.cellImage?.image = UIImage(data: cellItem.hikingImages as! Data)
+        }
         
         //Display a rounded image
         //cell.cellImage?.layer.cornerRadius = cell.cellImage.frame.size.width/8.0
         //cell.cellImage?.clipsToBounds = true
         //cell.cellImage?.layer.masksToBounds = true
         
+        /*
         if (cellItem.hikingChecked) {
             cell.accessoryType = .checkmark
             print("Row checked: \(indexPath.row)")
@@ -155,10 +162,10 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         }
         else {
             cell.accessoryType = .none
-            print("Row checked: \(indexPath.row)")
+            print("Row not checked: \(indexPath.row)")
             
         }
-
+        */
    
         return cell
     }
@@ -167,6 +174,9 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         let cellItem = searchController.isActive ? searchResults[indexPath.row] : MyHikingList[indexPath.row]
         cellItem.hikingChecked = !(cellItem.hikingChecked)
         
+        self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        
+        /*
         if (cellItem.hikingChecked) {
             
             self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
@@ -178,6 +188,7 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
             print("Row checked: \(indexPath.row)")
             
         }
+        */
         
     }
 
@@ -203,6 +214,7 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
                 let itemToDelete = self.fetchResultsController.object(at: indexPath)
+                print("delete commit: \(indexPath)\n")
                 context.delete(itemToDelete)
                 appDelegate.saveContext()
             }

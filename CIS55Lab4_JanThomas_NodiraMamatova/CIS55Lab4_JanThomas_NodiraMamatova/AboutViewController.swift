@@ -1,6 +1,6 @@
 //
 //  AboutViewController.swift
-//  CIS55Lab2_JanThomas
+//  CIS55Lab4_JanThomas_NodiraMamatova
 //
 //  Created by Jan on 2/4/17.
 //  Copyright © 2017 DeAnza. All rights reserved.
