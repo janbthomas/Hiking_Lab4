@@ -13,6 +13,8 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
 
 
     var MyHikingList : [HikingListObjectMO] = []
+    var hikingDict = [String: [HikingListObjectMO]]()
+    var hikingSectionTitles = [String]()
         
     var searchController : UISearchController!
     var searchResults : [HikingListObjectMO] = []
@@ -62,9 +64,30 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
                 print(error)
             }
         }
-        
+        CreateHikingDict()
     }
 
+    func CreateHikingDict() {
+        for hikingItem in MyHikingList {
+            // Get the first letter of the hiking location name and build the dictionary
+            let hikingLocation : String? = hikingItem.hikingLocations
+            let hikingKey = String((hikingLocation?[(hikingLocation?.startIndex)!])!)
+            
+            if var hikingValues = hikingDict[hikingKey] {
+                hikingValues.append(hikingItem)
+                hikingDict[hikingKey] = hikingValues
+            }
+            else {
+                hikingDict[hikingKey] = [hikingItem]
+            }
+        }
+        
+        // Get the section titles from the dictionary keys and sort them in ascending order
+        hikingSectionTitles = [String](hikingDict.keys)
+        hikingSectionTitles.sort()
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
         print("Data Reloaded")
@@ -81,17 +104,18 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
+        /*
         // Where changes are made, after the core data is saved, reset the loaded list and refresh
         switch type {
-        case .insert:
-            if let newIndexPath = newIndexPath {
-                tableView.insertRows(at: [newIndexPath], with: .fade)
-            }
-        case .delete:
-            if let indexPath = indexPath {
-                print("delete \(indexPath)\n")
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
+        //case .insert:
+            //if var newIndexPath = newIndexPath {
+                //tableView.insertRows(at: [newIndexPath], with: .fade)
+            //}
+        //case .delete:
+        //    if let indexPath = indexPath {
+        //         print("delete \(indexPath)\n")
+        //     tableView.deleteRows(at: [indexPath], with: .fade)
+        //    }
         case .update:
             if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -99,11 +123,20 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         default:
             tableView.reloadData()
         }
+        */
         
         if let fetchedObjects = controller.fetchedObjects {
+            print("Fetched Results Start")
             MyHikingList = fetchedObjects as! [HikingListObjectMO]
+            
+            // Reset the Dictionary and the section titles
+            hikingDict.removeAll()
+            hikingSectionTitles.removeAll()
+            CreateHikingDict()
+            print("Fetched Results End")
         }
     }
+    
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
@@ -113,7 +146,14 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        if searchController.isActive {
+            return 1
+        }
+        else {
+            print("numberOfSections: \(hikingSectionTitles.count)")
+            return hikingSectionTitles.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,25 +161,51 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         print ("HikingLocation: \(MyHikingList.count)")
         
         if searchController.isActive {
+            print("number of Rows in section: \(searchResults.count)")
             return searchResults.count
         }
         else {
-            return MyHikingList.count
+            let hikingKey = hikingSectionTitles[section]
+            if let hikingValues = hikingDict[hikingKey] {
+                print("hiking values: \(hikingValues.count)")
+                return hikingValues.count
+            }
+            else {
+                print("hikingValues: 0")
+                return 0
+                //return MyHikingList.count
+            }
         }
     }
 
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if searchController.isActive {
+            return ""
+        }
+        else {
+            return hikingSectionTitles[section]
+        }
+
+        
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cellIdentifier = "HikingCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MyTableViewCell
         
+        //Add Section Titles
+        let hikingKey = hikingSectionTitles[indexPath.section]
+        
         var cellItem : HikingListObjectMO
         if searchController.isActive {
             cellItem = searchResults[indexPath.row]
         }
         else {
-            cellItem = MyHikingList[indexPath.row]
+            //cellItem = MyHikingList[indexPath.row]
+                cellItem = (hikingDict[hikingKey]![indexPath.row])
+
         }
         // Configure the cell...
 
@@ -165,30 +231,16 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
             print("Row not checked: \(indexPath.row)")
             
         }
-        */
-   
+        
+    */
         return cell
     }
+    
+    override func sectionIndexTitles( for tableView: UITableView) -> [String]? {
+        return hikingSectionTitles
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cellItem = searchController.isActive ? searchResults[indexPath.row] : MyHikingList[indexPath.row]
-        cellItem.hikingChecked = !(cellItem.hikingChecked)
-        
-        self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        
-        /*
-        if (cellItem.hikingChecked) {
-            
-            self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            print("Row checked: \(indexPath.row)")
-            
-        }
-        else {
-            self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
-            print("Row checked: \(indexPath.row)")
-            
-        }
-        */
         
     }
 
@@ -211,6 +263,8 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
         if editingStyle == .delete {
             // Delete the row from the data source
             //MyHikingList.remove(at: indexPath.row)
+            print("Remove at indexPath row: \(indexPath.row)")
+            print("Remove at indexPath section: \(indexPath.section)")
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
                 let itemToDelete = self.fetchResultsController.object(at: indexPath)
@@ -221,7 +275,8 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
             //tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            print("insert now")
+        }
     }
     
 
@@ -246,11 +301,25 @@ class MyTableViewController: UITableViewController, UISearchResultsUpdating, NSF
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        
         if segue.identifier == "ShowItemDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let detailVC = segue.destination as! MyDetailViewController
                 
-                detailVC.myHikingList = searchController.isActive ? searchResults[indexPath.row] : MyHikingList[indexPath.row]
+                //Add Section Titles
+                let hikingKey = hikingSectionTitles[indexPath.section]
+                
+                if searchController.isActive {
+                    detailVC.myHikingList = searchResults[indexPath.row]
+                }
+                else {
+                    detailVC.myHikingList = (hikingDict[hikingKey]![indexPath.row])
+                    
+                }
+                
+                
+                //detailVC.myHikingList = searchController.isActive ? searchResults[indexPath.row] : MyHikingList[indexPath.row]
 
             }
         }

@@ -50,6 +50,7 @@ class AddViewController: UIViewController {
                 newHikingItem.hikingImages = NSData(data: UIImagePNGRepresentation(UIImage(named: String("trail")!)!)!)
             }
             
+            print("Before Save Button Clicked")
             appDelegate.saveContext()
             print("Save Button Clicked")
             
